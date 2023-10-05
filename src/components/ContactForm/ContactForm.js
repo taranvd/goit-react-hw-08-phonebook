@@ -9,6 +9,7 @@ import {
 } from './ContactForm.style';
 import { addContact } from 'redux/contacts/operations';
 import { getContacts } from 'redux/contacts/selectors';
+import toast from 'react-hot-toast';
 
 const scheme = Yup.object().shape({
   name: Yup.string()
@@ -16,7 +17,6 @@ const scheme = Yup.object().shape({
     .max(10, 'Too Long!')
     .required('Required!'),
 
-  //* Для ментора: Тут я не знаю як додати валідацію для 654-42-42 такого вводу, тому залишив так
   number: Yup.number().required('Required!'),
 });
 
@@ -49,6 +49,7 @@ export const ContactForm = () => {
         onSubmit={async (values, actions) => {
           const addedContactSuccessfuly = addContactHandler(values);
           if (addedContactSuccessfuly) {
+            toast.success('Contact successfully added');
             actions.resetForm();
           }
         }}

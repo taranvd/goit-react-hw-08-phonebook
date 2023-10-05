@@ -10,51 +10,48 @@ const initialState = {
 const slice = createSlice({
   name: 'contacts',
   initialState: initialState,
-  reducers: {
-    clearAll: state => (state.contacts = []),
-  },
-  extraReducers: {
-    [fetchContacts.pending](state, action) {
-      state.isLoading = true;
-    },
-    [fetchContacts.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = action.payload;
-    },
-    [fetchContacts.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [addContact.pending](state, action) {
-      state.isLoading = true;
-    },
-    [addContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts.push(action.payload);
-    },
-    [addContact.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [removeContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload.id
-      );
-    },
-    [removeContact.pending](state, action) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [removeContact.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addContact.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts.push(action.payload);
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(removeContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== action.payload.id
+        );
+      })
+      .addCase(removeContact.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(removeContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { clearAll } = slice.actions;
 export const contactReducer = slice.reducer;

@@ -1,14 +1,9 @@
 import { useEffect } from 'react';
 import { getContacts, getFilter } from 'redux/contacts/selectors';
-import {
-  ButtonClearAll,
-  ButtonStyled,
-  List,
-  ListItem,
-} from './ContactsList.style';
+import { ButtonStyled, List, ListItem } from './ContactsList.style';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts, removeContact } from 'redux/contacts/operations';
-import { clearAll } from 'redux/contacts/contactsSlice';
+import toast from 'react-hot-toast';
 
 export const ContactsList = () => {
   const filter = useSelector(getFilter);
@@ -25,6 +20,7 @@ export const ContactsList = () => {
 
   const handleDeleteContact = id => {
     dispatch(removeContact(id));
+    toast.success('Contact deleted successfully');
   };
 
   return (
@@ -38,9 +34,6 @@ export const ContactsList = () => {
           </ButtonStyled>
         </ListItem>
       ))}
-      <ButtonClearAll onClick={() => dispatch(clearAll())}>
-        Clear all
-      </ButtonClearAll>
     </List>
   );
 };

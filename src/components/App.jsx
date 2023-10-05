@@ -23,24 +23,28 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route
-          path="/register"
-          element={
-            <ResctictedRoute component={Register} redirectTo="/contacts" />
-          }
-        />
-        <Route
-          path="/login"
-          element={<ResctictedRoute component={Login} redirectTo="/contacts" />}
-        />
-        <Route
-          path="/contacts"
-          element={<PrivateRoute component={Contacts} redirectTo="/login" />}
-        />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/register"
+            element={
+              <ResctictedRoute component={Register} redirectTo="/contacts" />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <ResctictedRoute component={Login} redirectTo="/contacts" />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={Contacts} redirectTo="/login" />}
+          />
+        </Route>
+      </Routes>
+    </>
   );
 };
