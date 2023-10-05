@@ -1,5 +1,5 @@
 // import { ButtonStyled } from 'components/ContactsList/ContactsList.style';
-import { changeFilter } from 'redux/filterSlice';
+import { changeFilter } from 'redux/contacts/filterSlice';
 import { FilterContainer, Label, Input } from './ContactFilter.style';
 import { useDispatch, useSelector } from 'react-redux';
 

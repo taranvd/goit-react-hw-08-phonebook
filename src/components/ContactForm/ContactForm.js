@@ -7,8 +7,8 @@ import {
   StyledButton,
   Error,
 } from './ContactForm.style';
-import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operations';
+import { getContacts } from 'redux/contacts/selectors';
 
 const scheme = Yup.object().shape({
   name: Yup.string()

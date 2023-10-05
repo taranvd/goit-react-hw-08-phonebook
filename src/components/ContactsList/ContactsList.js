@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getContacts, getFilter } from 'redux/selectors';
+import { getContacts, getFilter } from 'redux/contacts/selectors';
 import {
   ButtonClearAll,
   ButtonStyled,
@@ -7,8 +7,8 @@ import {
   ListItem,
 } from './ContactsList.style';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, removeContact } from 'redux/operations';
-import { clearAll } from 'redux/contactsSlice';
+import { fetchContacts, removeContact } from 'redux/contacts/operations';
+import { clearAll } from 'redux/contacts/contactsSlice';
 
 export const ContactsList = () => {
   const filter = useSelector(getFilter);
