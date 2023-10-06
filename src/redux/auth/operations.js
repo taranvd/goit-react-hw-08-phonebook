@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
       toast.success('Successful registration');
       return res.data;
     } catch (err) {
-      toast.error(err.message);
+      toast.error('Please check the entered data');
       return thunkAPI.rejectWithValue(err.message);
     }
   }
@@ -38,7 +38,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
-      toast.error(err.message);
+      toast.error('Please check the entered data');
       return thunkAPI.rejectWithValue(err.message);
     }
   }
@@ -52,7 +52,6 @@ export const logOut = createAsyncThunk(
       clearAuthHeader();
       toast.success('LogOut...');
     } catch (err) {
-      toast.error(err.message);
       return thunkAPI.rejectWithValue(err.message);
     }
   }

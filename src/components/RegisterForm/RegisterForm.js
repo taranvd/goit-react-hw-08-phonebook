@@ -5,18 +5,24 @@ import { useDispatch } from 'react-redux';
 const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
+    try {
+      const res = await dispatch(
+        register({
+          name: form.elements.name.value,
+          email: form.elements.email.value,
+          password: form.elements.password.value,
+        })
+      );
 
-    form.reset();
+      if (!res.error) {
+        form.reset();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

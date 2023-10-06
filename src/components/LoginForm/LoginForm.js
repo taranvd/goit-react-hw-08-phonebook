@@ -5,16 +5,24 @@ import { logIn } from 'redux/auth/operations';
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
-      logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+
+    try {
+      const res = await dispatch(
+        logIn({
+          email: form.elements.email.value,
+          password: form.elements.password.value,
+        })
+      );
+
+      if (!res.error) {
+        form.reset();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
